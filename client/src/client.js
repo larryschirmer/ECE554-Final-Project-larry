@@ -1,3 +1,5 @@
+let sock;
+
 const writeEvent = (text) => {
   //<ul> element
   const parent = document.querySelector('#events');
@@ -42,14 +44,16 @@ const bettingPrice = () => {
       const input = document.querySelector('#price');
       // const text = input.value;
 
-      sock.emit('price', input);
+      sock.emit('turn', input);
     }
   });
 };
 
-const bettingPriceFrom = (event) => {
-  event.preventDefault();
-  console.log(event.target);
+const bettingPriceFrom = (e) => {
+  e.preventDefault();
+  const inputVal = document.querySelector('#price');
+  console.log(inputVal.value);
+  sock.emit('price', inputVal);
 };
 
 //Display the selected betting amount
