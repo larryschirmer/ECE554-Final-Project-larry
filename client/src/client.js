@@ -1,9 +1,9 @@
 const writeEvent = (text) => {
   //<ul> element
-  const parent = document.querySelector("#events");
+  const parent = document.querySelector('#events');
 
   //<li> element
-  const el = document.createElement("li");
+  const el = document.createElement('li');
   el.innerHTML = text;
 
   parent.appendChild(el);
@@ -13,11 +13,11 @@ const writeEvent = (text) => {
 const onFormSubmitted = (e) => {
   e.preventDefault();
 
-  const input = document.querySelector("#chat");
+  const input = document.querySelector('#chat');
   const text = input.value;
   // input.value = "";
 
-  sock.emit("message", text);
+  sock.emit('message', text);
 };
 
 // Countdown Timer
@@ -35,36 +35,29 @@ const onFormSubmitted = (e) => {
 
 // Display the inputted price
 const bettingPrice = () => {
-  const price = document.getElementById(price);
-  price.addEventListener("keyup", (e) => {
+  const price = document.getElementById('price');
+  price.addEventListener('keyup', (e) => {
     if (e.key === 13) {
       event.preventDefault();
-      const input = document.querySelector("#price");
+      const input = document.querySelector('#price');
       // const text = input.value;
 
-      sock.emit("price", input);
+      sock.emit('price', input);
     }
   });
 };
 
+const bettingPriceFrom = (event) => {
+  event.preventDefault();
+  console.log(event.target);
+};
+
 //Display the selected betting amount
 const addPriceButtonListeners = () => {
-  ["add50", "add500", "add2000"].forEach((id) => {
+  ['add50', 'add500', 'add2000'].forEach((id) => {
     const button = document.getElementById(id);
-    button.addEventListener("click", () => {
-      sock.emit("turn", id);
+    button.addEventListener('click', () => {
+      sock.emit('turn', id);
     });
   });
 };
-
-writeEvent("Welcome to RT Gambling!");
-
-const sock = io();
-sock.on("message", writeEvent);
-
-document
-  .querySelector("#chat-form")
-  .addEventListener("submit", onFormSubmitted);
-
-addPriceButtonListeners();
-bettingPrice();
