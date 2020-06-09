@@ -52,8 +52,8 @@ const bettingPrice = () => {
 const bettingPriceFrom = (e) => {
   e.preventDefault();
   const inputVal = document.querySelector('#price');
-  console.log(inputVal.value);
-  sock.emit('price', inputVal);
+
+  sock.emit('message', inputVal.value);
 };
 
 //Display the selected betting amount
