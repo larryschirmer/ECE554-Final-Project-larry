@@ -61,3 +61,20 @@ const addPriceButtonListeners = () => {
     });
   });
 };
+
+const main = () => {
+  writeEvent('Welcome to RT Gambling!');
+
+  sock = io();
+  sock.on('message', writeEvent);
+
+  document.querySelector('#chat-form').addEventListener('submit', onFormSubmitted);
+  document.querySelector('#betting-price-form').addEventListener('submit', bettingPriceFrom);
+
+  addPriceButtonListeners();
+  bettingPrice();
+};
+
+document.onreadystatechange = function () {
+  if (document.readyState === 'complete') main();
+};
